@@ -1,0 +1,31 @@
+{
+  "name": "desafio-brevly",
+  "version": "1.0.0",
+  "description": "Meu desafio pos 360 - Brevly",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch --env-file .env src/index.ts",
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "node dist/index.js",
+    "db:migrate": "tsx scripts/migrate.ts"
+  },
+  "author": "Filipe Lopes",
+  "license": "ISC",
+  "packageManager": "pnpm@10.6.5",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.686.0",
+    "@fastify/cors": "^8.5.0",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.36.4",
+    "fastify": "^4.26.2",
+    "postgres": "^3.4.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.14",
+    "@types/node": "^25.2.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
