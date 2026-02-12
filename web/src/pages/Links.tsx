@@ -1,14 +1,18 @@
-import { useMemo, useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { apiFetch, ApiError, getFrontendUrl, LinkItem } from '@/lib/api'
+import Logo from '@/assets/Logo.svg'
 import { LinkForm } from '@/components/LinkForm'
 import { LinksList } from '@/components/LinksList'
-import Logo from '@/assets/Logo.svg'
+import { ApiError, type LinkItem, apiFetch, getFrontendUrl } from '@/lib/api'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMemo, useState } from 'react'
 
 export function LinksPage() {
   const queryClient = useQueryClient()
   const [formError, setFormError] = useState<string | null>(null)
   const [copiedCode, setCopiedCode] = useState<string | null>(null)
+  const [toast, setToast] = useState<{
+    title: string
+    message: string
+  } | null>(null)
   const frontendUrl = useMemo(() => getFrontendUrl(), [])
 
   const linksQuery = useQuery({
@@ -65,7 +69,14 @@ export function LinksPage() {
     const value = `${frontendUrl}/${shortCode}`
     navigator.clipboard.writeText(value).then(() => {
       setCopiedCode(shortCode)
-      setTimeout(() => setCopiedCode(null), 2000)
+      setToast({
+        title: 'Link copiado com sucesso',
+        message: `O link ${shortCode} foi copiado para a área de transferência.`
+      })
+      setTimeout(() => {
+        setCopiedCode(null)
+        setToast(null)
+      }, 2000)
     })
   }
 
@@ -106,6 +117,15 @@ export function LinksPage() {
           />
         </div>
       </div>
+      {toast ? (
+        <div className="toast">
+          <div className="toast-icon">i</div>
+          <div>
+            <div className="toast-title">{toast.title}</div>
+            <div className="toast-text">{toast.message}</div>
+          </div>
+        </div>
+      ) : null}
     </div>
   )
 }
