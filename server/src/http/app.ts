@@ -2,13 +2,11 @@ import Fastify from 'fastify'
 import cors from '@fastify/cors'
 
 export const app = Fastify({
-    logger: true
+  logger: true
 })
 
 app.register(cors, {
-    origin: true
+  origin: true
 })
-
-
 
 app.get('/health', async () => ({ status: 'ok' }))
