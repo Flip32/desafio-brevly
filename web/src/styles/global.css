@@ -118,6 +118,46 @@ label {
   box-shadow: 0 0 0 2px rgba(44, 70, 177, 0.16);
 }
 
+.input-prefix {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  background: var(--white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-prefix:focus-within {
+  border-color: var(--blue-base);
+  box-shadow: 0 0 0 2px rgba(44, 70, 177, 0.16);
+}
+
+.input-prefix.error {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 2px rgba(177, 44, 77, 0.16);
+}
+
+.input-prefix-text {
+  font-size: 14px;
+  color: var(--gray-300);
+}
+
+.input-prefix-field {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--gray-600);
+  min-width: 0;
+}
+
+.input-prefix-field::placeholder {
+  color: var(--gray-300);
+}
+
 .input.error {
   border-color: var(--danger);
   box-shadow: 0 0 0 2px rgba(177, 44, 77, 0.16);
@@ -197,6 +237,11 @@ label {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
+}
+
+.list-divider {
+  border-top: 1px solid var(--gray-200);
+  margin: 0 0 12px;
 }
 
 .list {

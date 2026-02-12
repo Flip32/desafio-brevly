@@ -1,4 +1,4 @@
-import LinkIcon from "@/assets/Link.svg";
+import LinkIcon from '@/assets/Link.svg'
 
 export function EmptyState() {
   return (
@@ -6,5 +6,5 @@ export function EmptyState() {
       <img src={LinkIcon} alt="Sem links" height={24} />
       Ainda não existem links cadastrados
     </div>
-  );
+  )
 }

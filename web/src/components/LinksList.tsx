@@ -1,21 +1,21 @@
-import { LinkItem, getFrontendUrl } from "@/lib/api";
-import DownloadIcon from "@/assets/DownloadSimple.svg";
-import CopyIcon from "@/assets/Copy.svg";
-import TrashIcon from "@/assets/Trash.svg";
-import { EmptyState } from "@/components/EmptyState";
+import CopyIcon from '@/assets/Copy.svg'
+import DownloadIcon from '@/assets/DownloadSimple.svg'
+import TrashIcon from '@/assets/Trash.svg'
+import { EmptyState } from '@/components/EmptyState'
+import { type LinkItem, getFrontendUrl } from '@/lib/api'
 
 type LinksListProps = {
-  links: LinkItem[];
-  isLoading: boolean;
-  errorMessage?: string | null;
-  onCopy: (shortCode: string) => void;
-  copiedShortCode: string | null;
-  onDelete: (shortCode: string) => void;
-  isDeleting: boolean;
-  deletingShortCode?: string;
-  onDownload: () => void;
-  isDownloading: boolean;
-};
+  links: LinkItem[]
+  isLoading: boolean
+  errorMessage?: string | null
+  onCopy: (shortCode: string) => void
+  copiedShortCode: string | null
+  onDelete: (shortCode: string) => void
+  isDeleting: boolean
+  deletingShortCode?: string
+  onDownload: () => void
+  isDownloading: boolean
+}
 
 export function LinksList({
   links,
@@ -27,10 +27,10 @@ export function LinksList({
   isDeleting,
   deletingShortCode,
   onDownload,
-  isDownloading,
+  isDownloading
 }: LinksListProps) {
-  const baseUrl = getFrontendUrl();
-  const hasLinks = links.length > 0;
+  const baseUrl = getFrontendUrl()
+  const hasLinks = links.length > 0
 
   return (
     <div className="card">
@@ -43,9 +43,10 @@ export function LinksList({
           disabled={!hasLinks || isDownloading}
         >
           <img src={DownloadIcon} alt="Baixar CSV" height={14} />
-          {isDownloading ? "Gerando..." : "Baixar CSV"}
+          {isDownloading ? 'Gerando...' : 'Baixar CSV'}
         </button>
       </div>
+      <div className="list-divider" />
 
       {isLoading ? (
         <div className="empty-state">Carregando links...</div>
@@ -55,20 +56,18 @@ export function LinksList({
         <EmptyState />
       ) : (
         <div className="list">
-          {links.map((link) => {
-            const shortUrl = `${baseUrl}/${link.shortCode}`;
-            const displayOriginal = link.originalUrl.replace(
-              /^https?:\/\//,
-              ""
-            );
-            const isDeletingItem = isDeleting && deletingShortCode === link.shortCode;
-            const isCopied = copiedShortCode === link.shortCode;
+          {links.map(link => {
+            const shortUrl = `${baseUrl}/${link.shortCode}`
+            const displayOriginal = link.originalUrl.replace(/^https?:\/\//, '')
+            const isDeletingItem =
+              isDeleting && deletingShortCode === link.shortCode
+            const isCopied = copiedShortCode === link.shortCode
 
             return (
               <div key={link.id} className="link-item">
                 <div className="link-info">
                   <a href={shortUrl} target="_blank" rel="noreferrer">
-                    {shortUrl.replace(/^https?:\/\//, "")}
+                    {shortUrl.replace(/^https?:\/\//, '')}
                   </a>
                   <span title={link.originalUrl}>{displayOriginal}</span>
                 </div>
@@ -79,7 +78,7 @@ export function LinksList({
                     type="button"
                     className="icon-button"
                     onClick={() => onCopy(link.shortCode)}
-                    title={isCopied ? "Copiado" : "Copiar"}
+                    title={isCopied ? 'Copiado' : 'Copiar'}
                   >
                     <img src={CopyIcon} alt="Copiar" height={14} />
                   </button>
@@ -94,10 +93,10 @@ export function LinksList({
                   </button>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
       )}
     </div>
-  );
+  )
 }
