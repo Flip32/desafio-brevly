@@ -78,15 +78,19 @@ export async function linksRoutes(app: FastifyInstance) {
 
     const { shortCode } = paramsSchema.parse(request.params)
 
-    const link = await db.query.links.findFirst({
-      where: eq(links.shortCode, shortCode)
-    })
+    const [updated] = await db
+      .update(links)
+      .set({
+        accessCount: sql`${links.accessCount} + 1`
+      })
+      .where(eq(links.shortCode, shortCode))
+      .returning()
 
-    if (!link) {
+    if (!updated) {
       return reply.status(404).send({ message: 'Link não encontrado' })
     }
 
-    return { link }
+    return { link: updated }
   })
 
   app.delete('/links/:shortCode', async (request, reply) => {
@@ -118,8 +122,7 @@ export async function linksRoutes(app: FastifyInstance) {
     const [updated] = await db
       .update(links)
       .set({
-        accessCount: sql`${links.accessCount}
-                + 1`
+        accessCount: sql`${links.accessCount} + 1`
       })
       .where(eq(links.shortCode, shortCode))
       .returning()
@@ -134,6 +137,7 @@ export async function linksRoutes(app: FastifyInstance) {
   app.get('/links/export', async (request, reply) => {
     const data = await db
       .select({
+        id: links.id,
         originalUrl: links.originalUrl,
         shortCode: links.shortCode,
         accessCount: links.accessCount,
@@ -142,11 +146,23 @@ export async function linksRoutes(app: FastifyInstance) {
       .from(links)
       .orderBy(desc(links.createdAt))
 
+    const originHeader =
+      typeof request.headers.origin === 'string'
+        ? request.headers.origin
+        : typeof request.headers.referer === 'string'
+          ? request.headers.referer
+          : ''
+
+    const shortBase = originHeader
+      ? new URL(originHeader).origin.replace(/\/$/, '')
+      : ''
+
     const csv = toCsv(
-      ['original_url', 'short_code', 'access_count', 'created_at'],
+      ['id', 'original_url', 'short_url', 'access_count', 'created_at'],
       data.map(link => [
+        link.id,
         link.originalUrl,
-        link.shortCode,
+        shortBase ? `${shortBase}/${link.shortCode}` : link.shortCode,
         link.accessCount,
         link.createdAt.toISOString()
       ])
