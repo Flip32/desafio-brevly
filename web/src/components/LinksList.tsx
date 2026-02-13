@@ -91,7 +91,14 @@ export function LinksList({
                   <button
                     type="button"
                     className="icon-button"
-                    onClick={() => onDelete(link.shortCode)}
+                    onClick={() => {
+                      const shouldDelete = window.confirm(
+                        `Você realmente quer apagar o link ${link.shortCode}?`
+                      )
+                      if (shouldDelete) {
+                        onDelete(link.shortCode)
+                      }
+                    }}
                     disabled={isDeletingItem}
                     title="Excluir"
                   >

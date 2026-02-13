@@ -218,7 +218,7 @@ label {
   border: none;
   font-size: var(--text-md-size);
   line-height: var(--text-md-line);
-  font-weight: var(--font-bold);
+  font-weight: var(--font-semibold);
   color: var(--white);
   background: var(--blue-base);
   cursor: pointer;
