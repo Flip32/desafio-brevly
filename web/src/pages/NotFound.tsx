@@ -2,7 +2,7 @@ import NotFoundIcon from '@/assets/404.svg'
 
 export function NotFoundPage() {
   return (
-    <div className="page">
+    <div className="page page-centered">
       <div className="container">
         <div className="status-card card">
           <img src={NotFoundIcon} alt="404" height={64} />

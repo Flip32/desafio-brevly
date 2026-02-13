@@ -43,7 +43,7 @@ export function RedirectPage() {
   }
 
   return (
-    <div className="page">
+    <div className="page page-centered">
       <div className="container">
         <div className="status-card card">
           <img src={LogoIcon} alt="Brev.ly" height={32} />

@@ -62,6 +62,18 @@ textarea {
   padding: 32px 16px 48px;
 }
 
+.page-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -15%;
+}
+
+.page-centered .container {
+  max-width: 520px;
+  width: 100%;
+}
+
 .container {
   width: 100%;
   max-width: 980px;
@@ -93,7 +105,7 @@ textarea {
 
 .card {
   background: var(--gray-100);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 24px;
   box-shadow: var(--shadow-soft);
 }
@@ -116,7 +128,7 @@ textarea {
 label {
   font-size: var(--text-xs-size);
   line-height: var(--text-xs-line);
-  font-weight: var(--font-bold);
+  font-weight: var(--font-regular);
   text-transform: uppercase;
   color: var(--gray-400);
   letter-spacing: 0.8px;
@@ -162,6 +174,7 @@ label {
   box-shadow: 0 0 0 2px rgba(177, 44, 77, 0.16);
 }
 
+/*No vídeo ele fica claro, no figma escuro*/
 .input-prefix-text {
   font-size: var(--text-md-size);
   line-height: var(--text-md-line);
@@ -307,7 +320,7 @@ label {
 .link-info a {
   font-size: var(--text-md-size);
   line-height: var(--text-md-line);
-  font-weight: var(--font-bold);
+  font-weight: var(--font-semibold);
   color: var(--blue-base);
   word-break: break-word;
 }
@@ -356,7 +369,10 @@ label {
 }
 
 .status-card {
-  min-height: 220px;
+  min-height: 300px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
