@@ -22,7 +22,7 @@ export function LinksPage() {
       return data.links
     },
     refetchOnWindowFocus: true,
-    refetchInterval: 10000, // Fake snapshot real-time updates. Implement WebSocket for real-time in a production app ??
+    refetchInterval: 10000, // Fake snapshot real-time updates!!
     refetchIntervalInBackground: true
   })
 

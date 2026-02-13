@@ -18,33 +18,34 @@ Aplicacao FullStack para encurtamento de URLs com cadastro, listagem, remocao, r
 
 **Checklist Backend (Desafio)**
 
-- [ ] Deve ser possivel criar um link
-- [ ] Nao deve ser possivel criar um link com URL encurtada mal formatada
-- [ ] Nao deve ser possivel criar um link com URL encurtada ja existente
-- [ ] Deve ser possivel deletar um link
-- [ ] Deve ser possivel obter a URL original por meio de uma URL encurtada
-- [ ] Deve ser possivel listar todas as URL's cadastradas
-- [ ] Deve ser possivel incrementar a quantidade de acessos de um link
-- [ ] Deve ser possivel exportar os links criados em um CSV
-- [ ] Deve ser possivel acessar o CSV por meio de uma CDN (Cloudflare R2)
-- [ ] Deve ser gerado um nome aleatorio e unico para o arquivo
-- [ ] Deve ser possivel realizar a listagem de forma performatica
-- [ ] O CSV deve ter campos como URL original, URL encurtada, contagem de acessos e data de criacao
+- ✅ Deve ser possivel criar um link
+- ✅ Nao deve ser possivel criar um link com URL encurtada mal formatada
+- ✅ Nao deve ser possivel criar um link com URL encurtada ja existente
+- ✅ Deve ser possivel deletar um link
+- ✅ Deve ser possivel obter a URL original por meio de uma URL encurtada
+- ✅ Deve ser possivel listar todas as URL's cadastradas
+- ✅ Deve ser possivel incrementar a quantidade de acessos de um link
+- ✅ Deve ser possivel exportar os links criados em um CSV
+- ✅ Deve ser possivel acessar o CSV por meio de uma CDN (Cloudflare R2)
+- ✅ Deve ser gerado um nome aleatorio e unico para o arquivo
+- ✅ Deve ser possivel realizar a listagem de forma performatica
+- ✅ O CSV deve ter campos como URL original, URL encurtada, contagem de acessos e data de criacao
+- ✅ Dockerfile criado para a API
 
 **Checklist Frontend (Desafio)**
 
-- [ ] Deve ser possivel criar um link
-- [ ] Nao deve ser possivel criar um link com encurtamento mal formatado
-- [ ] Nao deve ser possivel criar um link com encurtamento ja existente
-- [ ] Deve ser possivel deletar um link
-- [ ] Deve ser possivel obter a URL original por meio do encurtamento
-- [ ] Deve ser possivel listar todas as URL's cadastradas
-- [ ] Deve ser possivel incrementar a quantidade de acessos de um link
-- [ ] Deve ser possivel baixar um CSV com o relatorio dos links criados
-- [ ] Aplicacao React SPA com Vite
-- [ ] Layout fiel ao Figma
-- [ ] Boa UX (empty state, loading e bloqueio de acoes)
-- [ ] Responsividade (desktop e mobile)
+- ✅ Deve ser possivel criar um link
+- ✅ Nao deve ser possivel criar um link com encurtamento mal formatado
+- ✅ Nao deve ser possivel criar um link com encurtamento ja existente
+- ✅ Deve ser possivel deletar um link
+- ✅ Deve ser possivel obter a URL original por meio do encurtamento
+- ✅ Deve ser possivel listar todas as URL's cadastradas
+- ✅ Deve ser possivel incrementar a quantidade de acessos de um link
+- ✅ Deve ser possivel baixar um CSV com o relatorio dos links criados
+- ✅ Aplicacao React SPA com Vite
+- ✅ Layout fiel ao Figma
+- ✅ Boa UX (empty state, loading e bloqueio de acoes)
+- ✅ Responsividade (desktop e mobile)
 
 **Backend**
 
@@ -97,8 +98,9 @@ Endpoints principais:
 CSV exportado:
 
 Campos e ordem:
+- `id`
 - `original_url`
-- `short_code`
+- `short_url`
 - `access_count`
 - `created_at`
 
@@ -165,4 +167,3 @@ cd web
 pnpm install
 pnpm run dev
 ```
-
