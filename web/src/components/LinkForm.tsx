@@ -53,14 +53,9 @@ type LinkFormProps = {
     shortCode: string
   }) => Promise<void>
   isSubmitting: boolean
-  errorMessage?: string | null
 }
 
-export function LinkForm({
-  onCreate,
-  isSubmitting,
-  errorMessage
-}: LinkFormProps) {
+export function LinkForm({ onCreate, isSubmitting }: LinkFormProps) {
   const {
     register,
     handleSubmit,
@@ -69,8 +64,6 @@ export function LinkForm({
   } = useForm<LinkFormData>({
     resolver: zodResolver(linkFormSchema)
   })
-
-  const apiError = Boolean(errorMessage)
 
   async function onSubmit(data: LinkFormData) {
     await onCreate({
@@ -100,11 +93,7 @@ export function LinkForm({
 
         <div className="form-group">
           <label htmlFor="shortCode">Link encurtado</label>
-          <div
-            className={`input-prefix ${
-              errors.shortCode || apiError ? 'error' : ''
-            }`}
-          >
+          <div className={`input-prefix ${errors.shortCode ? 'error' : ''}`}>
             <span className="input-prefix-text">brev.ly/</span>
             <input
               id="shortCode"
@@ -115,9 +104,6 @@ export function LinkForm({
           </div>
           {errors.shortCode && (
             <span className="helper-text">{errors.shortCode.message}</span>
-          )}
-          {!errors.shortCode && errorMessage && (
-            <span className="helper-text">{errorMessage}</span>
           )}
         </div>
 

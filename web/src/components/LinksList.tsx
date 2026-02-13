@@ -58,6 +58,7 @@ export function LinksList({
         <div className="list">
           {links.map(link => {
             const shortUrl = `${baseUrl}/${link.shortCode}`
+            const displayShortUrl = `brev.ly/${link.shortCode}`
             const displayOriginal = link.originalUrl.replace(/^https?:\/\//, '')
             const isDeletingItem =
               isDeleting && deletingShortCode === link.shortCode
@@ -66,8 +67,13 @@ export function LinksList({
             return (
               <div key={link.id} className="link-item">
                 <div className="link-info">
-                  <a href={shortUrl} target="_blank" rel="noreferrer">
-                    {shortUrl.replace(/^https?:\/\//, '')}
+                  <a
+                    href={shortUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={shortUrl}
+                  >
+                    {displayShortUrl}
                   </a>
                   <span title={link.originalUrl}>{displayOriginal}</span>
                 </div>

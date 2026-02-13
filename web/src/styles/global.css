@@ -93,13 +93,14 @@ textarea {
 .grid {
   margin-top: 24px;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 24px;
+  align-items: start;
 }
 
 @media (min-width: 900px) {
   .grid {
     grid-template-columns: 1fr 1fr;
-    align-items: start;
   }
 }
 
@@ -315,14 +316,19 @@ label {
   flex-direction: column;
   gap: 4px;
   min-width: 0;
+  flex: 1;
 }
 
 .link-info a {
+  display: block;
   font-size: var(--text-md-size);
   line-height: var(--text-md-line);
   font-weight: var(--font-semibold);
   color: var(--blue-base);
-  word-break: break-word;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .link-info span {
@@ -400,24 +406,37 @@ label {
   font-weight: 700;
 }
 
+/* Não tem o toast no figma! */
 .toast {
   position: fixed;
   right: 24px;
   bottom: 24px;
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: flex-start;
-  padding: 16px 18px;
+  padding: 12px 14px;
   background: #eef4ff;
-  border-radius: 12px;
-  box-shadow: var(--shadow-soft);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(31, 32, 37, 0.12);
   color: var(--gray-600);
-  max-width: 320px;
+  max-width: 300px;
+}
+
+.toast--info .toast-title {
+  color: var(--blue-base);
+}
+
+.toast--info .toast-text {
+  color: var(--blue-dark);
+}
+
+.toast--error {
+  background: #fbeaec;
 }
 
 .toast-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 999px;
   background: var(--blue-base);
   color: var(--white);
@@ -425,8 +444,12 @@ label {
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 11px;
   flex-shrink: 0;
+}
+
+.toast-icon--error {
+  background: var(--danger);
 }
 
 .toast-title {
@@ -436,11 +459,19 @@ label {
   margin-bottom: 4px;
 }
 
+.toast--error .toast-title {
+  color: var(--danger);
+}
+
 .toast-text {
   font-size: var(--text-sm-size);
   line-height: var(--text-sm-line);
   font-weight: var(--font-regular);
   color: var(--gray-500);
+}
+
+.toast--error .toast-text {
+  color: var(--danger);
 }
 
 @media (max-width: 600px) {
@@ -460,8 +491,33 @@ label {
     padding: 20px;
   }
 
+  .list-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .button-secondary {
+    width: fit-content;
+  }
+
+  .link-item {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .link-actions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .link-count {
+    min-width: 0;
+    text-align: left;
+  }
+
   .link-info span {
-    max-width: 200px;
+    max-width: 100%;
   }
 
   .link-actions {

@@ -7,9 +7,9 @@ import { useMemo, useState } from 'react'
 
 export function LinksPage() {
   const queryClient = useQueryClient()
-  const [formError, setFormError] = useState<string | null>(null)
   const [copiedCode, setCopiedCode] = useState<string | null>(null)
   const [toast, setToast] = useState<{
+    variant: 'info' | 'error'
     title: string
     message: string
   } | null>(null)
@@ -33,18 +33,29 @@ export function LinksPage() {
         body: JSON.stringify(payload)
       })
     },
-    onMutate: () => {
-      setFormError(null)
-    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['links'] })
     },
     onError: error => {
       if (error instanceof ApiError) {
-        setFormError(error.message)
+        setToast({
+          variant: 'error',
+          title: 'Erro no cadastro',
+          message:
+            error.status === 409
+              ? 'Essa URL encurtada já existe.'
+              : error.message
+        })
       } else {
-        setFormError('Não foi possível criar o link')
+        setToast({
+          variant: 'error',
+          title: 'Erro no cadastro',
+          message: 'Não foi possível criar o link.'
+        })
       }
+      setTimeout(() => {
+        setToast(null)
+      }, 2000)
     }
   })
 
@@ -73,6 +84,7 @@ export function LinksPage() {
     navigator.clipboard.writeText(value).then(() => {
       setCopiedCode(shortCode)
       setToast({
+        variant: 'info',
         title: 'Link copiado com sucesso',
         message: `O link ${shortCode} foi copiado para a área de transferência.`
       })
@@ -102,7 +114,6 @@ export function LinksPage() {
               await createMutation.mutateAsync(payload)
             }}
             isSubmitting={createMutation.isPending}
-            errorMessage={formError}
           />
 
           <LinksList
@@ -120,8 +131,10 @@ export function LinksPage() {
         </div>
       </div>
       {toast ? (
-        <div className="toast">
-          <div className="toast-icon">i</div>
+        <div className={`toast toast--${toast.variant}`}>
+          <div className={`toast-icon toast-icon--${toast.variant}`}>
+            {toast.variant === 'error' ? '!' : 'i'}
+          </div>
           <div>
             <div className="toast-title">{toast.title}</div>
             <div className="toast-text">{toast.message}</div>
