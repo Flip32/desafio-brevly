@@ -20,7 +20,10 @@ export function LinksPage() {
     queryFn: async () => {
       const data = await apiFetch<{ links: LinkItem[] }>('/links')
       return data.links
-    }
+    },
+    refetchOnWindowFocus: true,
+    refetchInterval: 3000,
+    refetchIntervalInBackground: true
   })
 
   const createMutation = useMutation({
@@ -91,7 +94,6 @@ export function LinksPage() {
       <div className="container">
         <div className="logo">
           <img src={Logo} alt="Brev.ly" height={28} />
-          brev.ly
         </div>
 
         <div className="grid">

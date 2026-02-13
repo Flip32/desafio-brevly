@@ -1,8 +1,8 @@
+import LogoIcon from '@/assets/Logo_Icon.svg'
+import { type LinkItem, apiFetch } from '@/lib/api'
+import { NotFoundPage } from '@/pages/NotFound'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { apiFetch, LinkItem } from '@/lib/api'
-import LogoIcon from '@/assets/Logo_Icon.svg'
-import { NotFoundPage } from '@/pages/NotFound'
 
 export function RedirectPage() {
   const { shortCode } = useParams()
@@ -20,10 +20,6 @@ export function RedirectPage() {
         if (!active) return
 
         setLink(data.link)
-
-        apiFetch(`/links/${shortCode}/access`, { method: 'PATCH' }).catch(
-          () => {}
-        )
 
         setTimeout(() => {
           window.location.href = data.link.originalUrl
