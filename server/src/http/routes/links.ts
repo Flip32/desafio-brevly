@@ -157,6 +157,7 @@ export async function linksRoutes(app: FastifyInstance) {
       ? new URL(originHeader).origin.replace(/\/$/, '')
       : ''
 
+    // Tem id no vídeo, então eu incluí aqui tb.
     const csv = toCsv(
       ['id', 'original_url', 'short_url', 'access_count', 'created_at'],
       data.map(link => [
